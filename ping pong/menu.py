@@ -13,7 +13,8 @@ screen = pygame.display.set_mode((largura, altura))  # define o tamanho da tela
 pygame.display.set_caption('PING PONG')  # define o titulo do jogo
 
 ball = pygame.Rect(largura / 2 - 15, altura / 2 - 15, 30, 30)  # define a posicao, em x,y e depois o tamanho
-
+player = pygame.Rect(largura - 20, altura / 2 - 70, 10, 140)  # define a posicao, em x,y e depois o tamanho
+opponent = pygame.Rect(10, altura / 2 - 70, 10, 140)  # define a posicao, em x,y e depois o tamanho
 
 
 
@@ -59,8 +60,6 @@ imagemdefundo = pygame.image.load("imagens/fundo.jpg").convert_alpha()
 resume_img = pygame.image.load("imagens/play1.png").convert_alpha()
 mesadefundo = pygame.image.load("imagens/mesa.jpeg").convert_alpha()
 quit_img = pygame.image.load("imagens/quit1.png").convert_alpha()
-raqueteplayer = pygame.image.load("imagens/raquete2.png").convert_alpha()
-playeropponent = pygame.image.load("imagens/raquete2.png").convert_alpha()
 resume_button = button.Button(485, 315, resume_img, 0.8)
 # options_button = button.Button(297, 250, options_img, 1)
 quit_button = button.Button(450,460, quit_img, 1)
@@ -164,11 +163,14 @@ def pingpong():
         player_animation()
         opponent_ai()
 
-        screen.blit(mesadefundo, (0,0))
-        screen.blit() # cria
-        screen.blit() ## a raquete do lado esquerdo
-        pygame.draw.ellipse(screen, light_grey, ball)  # cria bola do jogo
 
+
+        screen.blit(mesadefundo,(0,0))  # define a cor do fundo
+        pygame.draw.rect(screen, light_grey, player)  # cria a raquete do lado direito
+        pygame.draw.rect(screen, light_grey, opponent)  # cria a raquete do lado esquerdo
+        pygame.draw.ellipse(screen, light_grey, ball)  # cria bola do jogo
+        pygame.draw.aaline(screen, light_grey, (largura / 2, 0),
+                           (largura / 2, altura))  # cria uma linha no meio da tela ( a rede do ping pong)
 
 
 
